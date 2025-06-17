@@ -1,28 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Saver </title>
-    <link rel="stylesheet" href="Style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Food Saver - Login/Signup</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(120deg, #ff6f61, #ffa600);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      background-color: white;
+      width: 100%;
+      max-width: 500px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      overflow: hidden;
+      padding: 30px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      font-size: 2.5em;
+      color: #ff6f61;
+      margin-bottom: 10px;
+    }
+
+    .tab-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .tab-buttons button {
+      flex: 1;
+      padding: 10px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: 16px;
+      color: #555;
+      transition: 0.3s;
+    }
+
+    .tab-buttons button.active {
+      border-bottom: 3px solid #ff6f61;
+      color: #ff6f61;
+      font-weight: bold;
+    }
+
+    form {
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    form.active {
+      display: flex;
+    }
+
+    input, select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button.submit {
+      background-color: #ff6f61;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button.submit:hover {
+      background-color: #e85b50;
+    }
+
+    small {
+      color: gray;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login Page</h2>
-        <form id="login-form">
-            <input type="text" id="username" placeholder="Username">
-            <input type="password" id="password" placeholder="Password">
-            <div>
-                <input type="checkbox" id="human-check" required>
-                <label for="human-check">I'm human</label>
-            </div>
-            <button type="submit">Login</button>
-        </form>
+
+  <div class="container">
+    <div class="header">
+      <h1>FOOD SAVER</h1>
+      <p>Save food. Serve humanity.</p>
     </div>
-    <form>
-        
+
+    <div class="tab-buttons">
+      <button id="loginTab" class="active">Login</button>
+      <button id="signupTab">Sign Up</button>
+    </div>
+
+    <!-- Login Form -->
+    <form id="loginForm" class="active">
+      <select required>
+        <option value="" disabled selected>Select Role</option>
+        <option value="donor">Donor</option>
+        <option value="receiver">Receiver</option>
+        <option value="admin">Admin</option>
+      </select>
+      <input type="email" placeholder="Email" required />
+      <input type="password" placeholder="Password" required />
+      <button class="submit">Login</button>
+      <small>Only authorized users can login as Admin.</small>
     </form>
 
-    <script src="Script.js"></script>
+    <!-- Signup Form -->
+    <form id="signupForm">
+      <select required>
+        <option value="" disabled selected>Register As</option>
+        <option value="donor">Donor</option>
+        <option value="receiver">Receiver</option>
+      </select>
+      <input type="text" placeholder="Full Name" required />
+      <input type="email" placeholder="Email" required />
+      <input type="password" placeholder="Password" required />
+      <input type="text" placeholder="Location" required />
+      <button class="submit">Sign Up</button>
+      <small>Admin accounts can only be created by system.</small>
+    </form>
+  </div>
+
+  <script>
+    const loginTab = document.getElementById('loginTab');
+    const signupTab = document.getElementById('signupTab');
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+
+    loginTab.addEventListener('click', () => {
+      loginTab.classList.add('active');
+      signupTab.classList.remove('active');
+      loginForm.classList.add('active');
+      signupForm.classList.remove('active');
+    });
+
+    signupTab.addEventListener('click', () => {
+      signupTab.classList.add('active');
+      loginTab.classList.remove('active');
+      signupForm.classList.add('active');
+      loginForm.classList.remove('active');
+    });
+  </script>
 </body>
 </html>
