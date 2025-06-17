@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Food Saver - Complete</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(120deg, #ff6f61, #ffa600);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      background-color: white;
+      max-width: 600px;
+      margin: 20px auto;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      padding: 30px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      font-size: 2.5em;
+      color: #ff6f61;
+      margin-bottom: 10px;
+    }
+
+    .tab-buttons, .form-group {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .tab-buttons button, button.submit {
+      flex: 1;
+      padding: 10px;
+      cursor: pointer;
+      background: #ff6f61;
+      border: none;
+      color: white;
+      font-size: 16px;
+      margin: 0 5px;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .tab-buttons button.active, button.submit:hover {
+      background-color: #e85b50;
+    }
+
+    form, .page {
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    form.active, .page.active {
+      display: flex;
+    }
+
+    input, select, textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    h2 {
+      color: #ff6f61;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>FOOD SAVER</h1>
+      <p>Save food. Serve humanity.</p>
+    </div>
+
+    <div class="tab-buttons">
+      <button onclick="showSection('loginSection')">Login</button>
+      <button onclick="showSection('signupSection')">Sign Up</button>
+    </div>
+
+    <!-- Login -->
+    <form id="loginSection" class="active">
+      <select required id="loginRole">
+        <option value="" disabled selected>Select Role</option>
+        <option value="donor">Donor</option>
+        <option value="receiver">Receiver</option>
+        <option value="admin">Admin</option>
+      </select>
+      <input type="email" placeholder="Email" required />
+      <input type="password" placeholder="Password" required />
+      <button class="submit" type="button" onclick="goToPage('login')">Login</button>
+    </form>
+
+    <!-- Signup -->
+    <form id="signupSection">
+      <select required>
+        <option value="" disabled selected>Register As</option>
+        <option value="donor">Donor</option>
+        <option value="receiver">Receiver</option>
+      </select>
+      <input type="text" placeholder="Full Name" required />
+      <input type="email" placeholder="Email" required />
+      <input type="password" placeholder="Password" required />
+      <input type="text" placeholder="Location" required />
+      <button class="submit" type="button" onclick="goToPage('signup')">Sign Up</button>
+    </form>
+
+    <!-- Donor Page -->
+    <div class="page" id="donorPage">
+      <h2>Donor Dashboard</h2>
+      <input type="text" placeholder="Food Type (Veg/Non-Veg)" required />
+      <input type="text" placeholder="Amount of Food" required />
+      <input type="text" placeholder="Your Location" required />
+      <input type="text" placeholder="Expiry Date" required />
+      <input type="text" placeholder="Contact Details" required />
+      <button class="submit">Submit Food</button>
+    </div>
+
+    <!-- Receiver Page -->
+    <div class="page" id="receiverPage">
+      <h2>Available Food</h2>
+      <p><strong>Food:</strong> Cooked Rice & Dal</p>
+      <p><strong>Type:</strong> Veg</p>
+      <p><strong>Amount:</strong> 10 Plates</p>
+      <p><strong>Location:</strong> Sector 10, Delhi</p>
+      <p><strong>Expires:</strong> Today, 9 PM</p>
+      <p><strong>Contact:</strong> +91-9876543210</p>
+    </div>
+
+    <!-- Admin Page -->
+    <div class="page" id="adminPage">
+      <h2>Admin Panel</h2>
+      <p>Admin Access Granted.</p>
+      <ul>
+        <li>Total Donors: 120</li>
+        <li>Total Receivers: 95</li>
+        <li>Food Listings Today: 40</li>
+        <li>Food Pickups Completed: 28</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function showSection(sectionId) {
+      document.querySelectorAll('form').forEach(form => form.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
+    }
+
+    function goToPage(action) {
+      const role = document.getElementById('loginRole').value;
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      if (role === 'donor') document.getElementById('donorPage').classList.add('active');
+      else if (role === 'receiver') document.getElementById('receiverPage').classList.add('active');
+      else if (role === 'admin') document.getElementById('adminPage').classList.add('active');
+    }
+  </script>
+</body>
+</html>
